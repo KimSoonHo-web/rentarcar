@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tset.rentalCar.region.mapper.RegionMapper">
+
+
+	<!-- 지역 리스트 -->
+	<select id="findAllRegions">
+		SELECT *
+		FROM tb_region
+	</select>
+
+	<!-- 지역, 지점 조회 -->
+	<select id="searchByQuery">
+		<choose>
+			<when test="query != null and query != ''">
+				SELECT * FROM tb_branch
+				WHERE
+				LOWER(branch_name) LIKE
+				LOWER(CONCAT('%', #{query}, '%'))
+				OR LOWER(branch_station) LIKE
+				LOWER(CONCAT('%', #{query}, '%'))
+			</when>
+			<otherwise>
+				SELECT * FROM tb_branch
+			</otherwise>
+		</choose>
+	</select>
+
+	<!-- 지점 상세 -->
+	<select id="getBranchDetails">
+		SELECT * from tb_branch
+		where branch_no= ${branchNo};
+	</select>
+
+</mapper>

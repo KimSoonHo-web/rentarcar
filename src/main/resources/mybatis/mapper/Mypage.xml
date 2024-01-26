@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tset.rentalCar.mypage.mapper.MypageMapper">
+
+	<!-- 마이페이지 전체 정보 조회 -->
+	<!-- <select id="myInfo"> SELECT * FROM tb_user u JOIN tb_driverlicenses 
+		dl ON u.USER_NO = dl.USER_NO JOIN tb_card c ON u.USER_NO = c.USER_NO WHERE 
+		u.USER_NO = #{userNo} </select> -->
+
+
+	<!-- 유저정보 업데이트 -->
+	<select id="getUserInfo">
+		SELECT *
+		FROM tb_user
+		WHERE user_no =
+		#{userNo}
+	</select>
+
+	<!-- 운전면허 업데이트 -->
+	<select id="getlicensInfo">
+		SELECT *
+		FROM TB_driverLicenses
+		WHERE user_no =
+		#{userNo}
+	</select>
+
+	<!-- 운전면허 조회 -->
+	<select id="selectlicensInfo">
+		SELECT *
+		FROM TB_driverLicenses
+		WHERE user_no =
+		#{userNo}
+	</select>
+	<!-- 카드정보 조회 -->
+	<select id="selectcarInfo">
+		SELECT *
+		FROM tb_card
+		WHERE user_no = #{userNo}
+	</select>
+
+	<!-- 비밀번호 변경 -->
+	<update id="changePassword">
+		UPDATE tb_user
+		SET USER_PASSWORD = #{encodedPassword},
+		user_modify = NOW()
+		WHERE USER_NO = #{userNo}
+	</update>
+
+	<!-- 휴대폰번호 변경 -->
+	<update id="changePhone">
+		UPDATE tb_user
+		SET user_phone =
+		#{newPhoneNumber},
+		user_modify = NOW()
+		WHERE USER_NO = #{userNo}
+	</update>
+
+	<!--유저 주소 삭제 -->
+	<update id="deleteUserAddresses">
+		UPDATE tb_user
+		SET user_address1 = #{userAddress1},
+		user_address2 = #{userAddress2},
+		user_address3 = #{userAddress3},
+		user_modify = now()
+		WHERE user_no = #{userNo}
+	</update>
+	<!-- 운전면허 삭제 -->
+	<delete id="deleteUserlicense">
+		DELETE FROM TB_driverLicenses
+		WHERE user_no =
+		#{userNo};
+	</delete>
+
+	<!-- 주소 업데이트 -->
+	<update id="updateAddress">
+		UPDATE tb_user
+		SET user_address1 = #{zipNo},
+		user_address2 = #{addr}, user_address3 =
+		#{dtlAddr}
+		WHERE user_no =
+		#{userNo}
+	</update>
+
+	<!-- 운전면허 정보 삽입 -->
+	<insert id="insertLicenseInfo">
+		INSERT INTO TB_driverLicenses (user_no, license_type,
+		license_number,
+		issue_date, expiration_date)
+		VALUES (#{userNo},
+		#{licenseType}, #{licenseNumber}, #{issueDate},
+		#{expirationDate})
+	</insert>
+
+	<!-- 운전면허 정보 업데이트 -->
+	<update id="updateLicenseInfo">
+		UPDATE TB_driverLicenses
+		SET license_type = #{licenseType},
+		license_number = #{licenseNumber},
+		issue_date = #{issueDate},
+		expiration_date = #{expirationDate}
+		WHERE user_no = #{userNo}
+	</update>
+	
+	<!-- 삭제 - 삭제날자 업데이트 -->
+	  <update id="deactivateUser">
+        UPDATE tb_user
+        SET user_delete = NOW()
+        WHERE user_no = #{userNo}
+    </update>
+
+</mapper>

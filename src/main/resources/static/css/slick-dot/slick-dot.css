@@ -1,0 +1,61 @@
+@charset "UTF-8";
+.slick-dots.mypage {
+  position: inherit;
+  bottom: inherit;
+  margin: 10px 0;
+}
+
+.slick-dots.mypage ul {
+  /* display: block; */
+  display: flex;
+  justify-content: center;
+}
+
+.slick-dots.mypage ul li {
+  border: none;
+  width: inherit;
+  height: inherit;
+  padding: 0;
+  margin: 5px;
+}
+.slick-dots.mypage ul li button:before {
+  content: "";
+  display: none;
+}
+
+.slick-dots.mypage ul li button {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  background: #aaa;
+  transition: width 0.3s ease;
+  text-indent: -9999px;
+}
+.slick-dots.mypage ul li.slick-active button {
+  width: 16px;
+  background: #222;
+}
+
+.slick-slider {
+  max-width: 100vw;
+  width: 100%;
+  /* overflow: hidden !important; */
+}
+
+.slick-slider .slick-track {
+  display: inline-flex;
+}
+
+.pc_wrap a {
+  cursor: pointer;
+}
+
+
+
+/* slick 퍼블작업 */
+.slick-slider .slick-slide {
+  padding:0 !important;
+}
+.mo_wrap .slick-slide {
+  margin-right:0 !important
+}

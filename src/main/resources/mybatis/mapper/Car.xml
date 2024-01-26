@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tset.rentalCar.car.mapper.CarMapper">
+	
+	
+	<select id="carList">
+		SELECT tb_car.*, tb_image.image_car_path,
+		tb_image.image_mark_path,
+		dc_title,dc_no
+		FROM tb_car
+		JOIN tb_branch ON
+		tb_car.branch_no = tb_branch.branch_no
+		JOIN tb_image ON tb_car.car_no =
+		tb_image.car_no
+		JOIN tb_discount ON tb_car.car_no = tb_discount.car_no
+		WHERE tb_branch.branch_name = #{branchName};
+	</select>
+
+
+	<select id="carDetail">
+		SELECT tb_car.*,tb_branch.*, tb_image.image_car_path,
+		tb_image.image_mark_path,
+		dc_title,dc_no,branch_name,ot_fuel,ot_age,ot_career,ot_text1,ot_text2,ot_golfbag,ot_stroller
+		FROM tb_car
+		JOIN tb_branch ON tb_car.branch_no = tb_branch.branch_no
+		JOIN tb_image ON tb_car.car_no = tb_image.car_no
+		JOIN tb_discount ON tb_car.car_no = tb_discount.car_no
+		JOIN tb_option ON tb_car.car_no = tb_option.car_no
+		WHERE tb_car.car_no =
+		#{carNo};
+	</select>
+
+</mapper>
+
+
